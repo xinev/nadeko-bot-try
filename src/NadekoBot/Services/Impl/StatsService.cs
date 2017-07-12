@@ -116,6 +116,14 @@ namespace NadekoBot.Services.Impl
 
                 return Task.CompletedTask;
             };
+            
+            var platform = "other";
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    platform = "linux";
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                    platform = "osx";
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    platform = "windows";
 
             carbonitexTimer = new Timer(async (state) =>
             {
@@ -151,7 +159,7 @@ namespace NadekoBot.Services.Impl
                         {
                             using (var content = new FormUrlEncodedContent(
                                 new Dictionary<string, string> {
-                                    { "id", string.Concat(MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(_creds.ClientId.ToString())).Select(x => x.ToString("X2"))) },
+                                    { "id", string.Concat(MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(NadekoBot.Credentials.ClientId.ToString())).Select(x => x.ToString("X2"))) },
                                     { "guildCount", _client.GetGuildCount().ToString() },
                                     { "version", BotVersion },
                                     { "platform", platform }}))
