@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace NadekoBot.Services.Impl
